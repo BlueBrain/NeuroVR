@@ -14,14 +14,19 @@ public class NeuritesGen : MonoBehaviour
     public int numSegments = 3;
     public string path;
     public float scale = 1.0f;
+    public Quaternion rot = Quaternion.identity;
+    public Text display_Text;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        var pathDevice = Application.persistentDataPath;
-        var fullPath = Path.GetFullPath(pathDevice);
+        var pathDevice = Application.streamingAssetsPath;
+        var fullPath = pathDevice + Path.DirectorySeparatorChar + path;
        
-        Neurites neurites= TraceLoader.loadTrace(path, scale);
+        // display_Text.text = fullPath;
+
+        Neurites neurites= TraceLoader.loadTrace(fullPath, scale, rot);
         neurites.process();
 
         GameObject neuritesObj = new GameObject("neurites");

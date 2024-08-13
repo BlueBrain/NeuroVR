@@ -119,8 +119,8 @@ Material:
     - _height1: 0.001
     - _height2: 0.00001
     - _maxDistanceInv: 1
-    - _maxLevel: 6
-    - _minLevel: 1
+    - _maxLevel: 5
+    - _minLevel: 2
     - _pow: 2
     - _scale: 5000
     - _scale0: 26.54

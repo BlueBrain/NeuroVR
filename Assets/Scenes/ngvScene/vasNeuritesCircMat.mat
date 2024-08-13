@@ -124,8 +124,8 @@ Material:
     - _height0: 0.003
     - _height1: 0.0005
     - _height2: 0.00001
-    - _maxDistanceInv: 0.03
-    - _maxLevel: 20
+    - _maxDistanceInv: 0.1
+    - _maxLevel: 10
     - _minLevel: 2
     - _pow: 2
     - _scale: 5000
@@ -138,7 +138,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _baseColor: {r: 1, g: 0.41844097, b: 0, a: 1}
+    - _baseColor: {r: 0, g: 0.5254902, b: 1, a: 1}
     - _color1: {r: 0, g: 0.5, b: 1, a: 1}
     - _color2: {r: 0.5, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

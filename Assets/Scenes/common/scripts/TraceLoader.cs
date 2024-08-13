@@ -8,36 +8,58 @@ using System.IO;
 public class TraceLoader
 {
 
-    public static Neurites loadTrace(string path, float scale)
+    public static Neurites loadTrace(string path, float scale, Quaternion rot)
     {
         List<Node> nodes = new List<Node>();
         List<(int, int)> sections = new List<(int, int)>();
-        StreamReader sr = new StreamReader(path);
-        string line; 
-       
-        char[] whitespace = new char[] {' ', '\t'};
-        while((line = sr.ReadLine()) != null)
+        List<string> lines = new List<string>();
+
+#if UNITY_ANDROID
+        UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(path); 
+        www.SendWebRequest();
+        while (!www.isDone)
         {
-            line = line.Trim();
-            if ( !string.IsNullOrEmpty(line))
-            if (line[0] != '#') 
+        }
+        string text = www.downloadHandler.text;  
+        char[] newlinessep = new char[] {'r', '\n'};
+        foreach (string newLine in text.Split(newlinessep))
+#else
+        StreamReader sr = new StreamReader(path);
+        string newLine;
+        while((newLine = sr.ReadLine()) != null)
+#endif        
+        {
+            string trimLine = newLine.Trim();
+            if ( !string.IsNullOrEmpty(trimLine))
+            if (trimLine[0] != '#') 
             {
-                string[] sl = line.Split(whitespace, StringSplitOptions.RemoveEmptyEntries);
-                if (sl[0] == "n")
-                {
-                    float x =float.Parse(sl[1]) * scale;
-                    float y =float.Parse(sl[2]) * scale;
-                    float z =float.Parse(sl[3]) * scale;
-                    float r =float.Parse(sl[4]) * scale;
-                    nodes.Add(new Node( new Vector3(x,y,z), r));
-                }
-                else if (sl[0] == "s")
-                {
-                    int id0 = Int32.Parse(sl[1]);
-                    int id1 = Int32.Parse(sl[2]);
-                    sections.Add((id0, id1));
-                }
-            }    
+                lines.Add(trimLine);
+            }
+        }
+
+        // debugText.text = lines[0];
+        char[] whitespace = new char[] {' ', '\t'};
+        foreach (string line in lines)
+        {             
+            Debug.Log(line);
+            string[] sl = line.Split(whitespace, StringSplitOptions.RemoveEmptyEntries);
+            if (sl[0] == "n")
+            {
+                // TO REMOVE
+                float x = -float.Parse(sl[1]); 
+                float y =float.Parse(sl[2]);
+                float z =float.Parse(sl[3]);
+                float r =float.Parse(sl[4]) * scale;
+                Vector3 pos = new Vector3(x, y ,z) * scale;
+                pos = rot * pos;
+                nodes.Add(new Node( pos, r));
+            }
+            else if (sl[0] == "s")
+            {
+                int id0 = Int32.Parse(sl[1]);
+                int id1 = Int32.Parse(sl[2]);
+                sections.Add((id0, id1));
+            }
         }
         
         Neurites neurites = new Neurites();
