@@ -274,7 +274,7 @@ MonoBehaviour:
   mat: {fileID: 2100000, guid: 96e9511638f5cba4fbd02360777c0d15, type: 2}
   selectMat: {fileID: 2100000, guid: 779e63e87a2dad948a4ea6319c8a2139, type: 2}
   noSelectMat: {fileID: 2100000, guid: efab9ef0d8243ef4b9d898f5a13d3a97, type: 2}
-  windowsOnly: 0
+  loadAsync: 0
 --- !u!4 &50595530
 Transform:
   m_ObjectHideFlags: 0
@@ -1542,7 +1542,7 @@ MonoBehaviour:
   mat: {fileID: 2100000, guid: 96e9511638f5cba4fbd02360777c0d15, type: 2}
   selectMat: {fileID: 2100000, guid: 779e63e87a2dad948a4ea6319c8a2139, type: 2}
   noSelectMat: {fileID: 2100000, guid: efab9ef0d8243ef4b9d898f5a13d3a97, type: 2}
-  windowsOnly: 0
+  loadAsync: 0
 --- !u!4 &1358431509
 Transform:
   m_ObjectHideFlags: 0
@@ -1655,7 +1655,7 @@ MonoBehaviour:
   mat: {fileID: 2100000, guid: 96e9511638f5cba4fbd02360777c0d15, type: 2}
   selectMat: {fileID: 2100000, guid: 779e63e87a2dad948a4ea6319c8a2139, type: 2}
   noSelectMat: {fileID: 2100000, guid: efab9ef0d8243ef4b9d898f5a13d3a97, type: 2}
-  windowsOnly: 0
+  loadAsync: 0
 --- !u!4 &1479321157
 Transform:
   m_ObjectHideFlags: 0
@@ -2969,5 +2969,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2018007505}
-  - {fileID: 603957321}
   - {fileID: 1895565031}
+  - {fileID: 603957321}
