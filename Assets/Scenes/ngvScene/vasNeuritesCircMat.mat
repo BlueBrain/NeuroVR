@@ -119,13 +119,14 @@ Material:
     - _ZWrite: 1
     - _alpha: 0.02
     - _alphaTess: 0.8
+    - _depth: 0.09
     - _dynamic: 0
     - _height: 0.0001
     - _height0: 0.003
     - _height1: 0.0005
     - _height2: 0.00001
     - _maxDistanceInv: 0.1
-    - _maxLevel: 10
+    - _maxLevel: 6
     - _minLevel: 2
     - _pow: 2
     - _scale: 5000

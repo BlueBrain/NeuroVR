@@ -113,6 +113,7 @@ Material:
     - _ZWrite: 1
     - _alpha: 0.02
     - _alphaTess: 0.8
+    - _depth: 0.15
     - _dynamic: 0
     - _height: 0.0001
     - _height0: 0.01

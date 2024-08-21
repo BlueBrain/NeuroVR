@@ -10,6 +10,7 @@ Shader "JJ/circ_tess_bump_perlin" {
         _minLevel("Min level", Float) = 2.0
         _maxLevel("Max level", Float) = 10.0
         _maxDistanceInv("Max distance", Float) = 0.001
+        _depth("Depth shadow", Float) = 0.05
         _alphaTess("Alpha tess", Float) = 1.0        
         _pow("Pow", Float) = 2.0
         _speed("Speed", Float) = 0.0
@@ -46,7 +47,8 @@ Shader "JJ/circ_tess_bump_perlin" {
             float _height1;   
             float _minLevel;
             float _maxLevel;
-            float _maxDistanceInv;
+            float _maxDistanceInv;         
+            float _depth;
             float _alphaTess; 
             float _pow;   
             float _speed;  
@@ -196,12 +198,13 @@ Shader "JJ/circ_tess_bump_perlin" {
                 float fz = layersNoise(input.position + float3(0, 0, e));
                 float3 df = float3(fx-f0, fy-f0, fz-f0) / e ;                
                 
-                float depth = 1 - ((input.positionCS.w) * 0.1);
-                float3 L = normalize(GetCurrentViewPosition() - input.positionWS);
+                float3 L = GetCurrentViewPosition() - input.positionWS;
+                float depth = (1.0 - clamp(length(L) * _depth, 0.0, 1.0)); 
+                L = normalize(L);
                 float3 N = normalize(input.normal);
                 N = normalize(N+df*depth);
 
-                float diffuse = pow(clamp(1 - dot(L, N), 0, 1), _pow);
+                float diffuse = pow(clamp(1 - dot(L, N), 0, 1), _pow) * depth;
                 float3 color =  _baseColor * (_alpha + diffuse * (1 - _alpha));   
 
                 return float4(color, 1);
