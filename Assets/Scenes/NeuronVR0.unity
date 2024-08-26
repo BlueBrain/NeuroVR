@@ -346,6 +346,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: neuron
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7432e934df35b514fbeb851244b2fcdf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -419,7 +424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &377308126
 Transform:
   m_ObjectHideFlags: 0
@@ -476,7 +481,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 96e9511638f5cba4fbd02360777c0d15, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -783,6 +788,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 682e241bfff74c84ea947117da204eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &903609467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903609456}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618b0e3f6c65dd247a4a016150006c57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LookSpeedController: 120
+  m_LookSpeedMouse: 4
+  m_MoveSpeed: 10
+  m_MoveSpeedIncrement: 2.5
+  m_Turbo: 10
 --- !u!1 &979207817
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,6 +920,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1776613770}
+  - component: {fileID: 1776613771}
   m_Layer: 0
   m_Name: models
   m_TagString: Untagged
@@ -922,6 +945,21 @@ Transform:
   - {fileID: 377308126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1776613771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776613769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b5d233532ff8e84a8891808359b1e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedHigh: 10
+  speedSlow: 1
+  maxLen: 20
 --- !u!1001 &1815098115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1419,6 +1457,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 903609462}
+    - targetCorrespondingSourceObject: {fileID: 100004, guid: 4b650a383c3760f449b65ff48bccdd5f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 903609467}
     - targetCorrespondingSourceObject: {fileID: 100006, guid: 4b650a383c3760f449b65ff48bccdd5f,
         type: 3}
       insertIndex: -1
