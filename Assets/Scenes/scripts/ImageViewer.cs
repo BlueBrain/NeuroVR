@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using UnityEngine.Networking;
 using System.Threading.Tasks;
 
 
@@ -24,7 +25,7 @@ public class ImageViewer : MonoBehaviour
     private int l = 0;
 
     // Start is called before the first frame update
-    void Start()
+    public async void Start()
     {
         loadURLs();
         loadURLs("png");
@@ -37,27 +38,34 @@ public class ImageViewer : MonoBehaviour
         }
 
         currentImg = clamp(offset);
-        setImage(mainViewer, currentImg);       
-        setImage(prevViewer, currentImg-1);     
-        setImage(nextViewer, currentImg+1);
+        await setImage(mainViewer, currentImg);       
+        await setImage(nextViewer, currentImg+1);
+        await setImage(prevViewer, currentImg-1);     
     }
 
     // Update is called once per frame
-    void Update()
+    public async void Update()
     {
+        await setImage(mainViewer, currentImg);
+        await setImage(prevViewer, currentImg-1);     
+        await setImage(nextViewer, currentImg+1);
         
+        int uIndex = clamp(currentImg-2);
+        unloadImage(uIndex);
+        uIndex = clamp(currentImg+2);
+        unloadImage(uIndex);
     }
 
-    private void loadImage(int index)
+    private async Task loadImage(int index)
     {
-        byte[] bytes = File.ReadAllBytes(imagesURLs[index]);
+        byte[] bytes = await File.ReadAllBytesAsync(imagesURLs[index]);
         images[index].LoadImage(bytes);
-        // images[index].Compress(true);
         imagesLoaded[index] = true;
     }
+
+    
     private void unloadImage(int index)
     {
-    
         Object.Destroy (images[index]);
         images[index] = new Texture2D(2,2);
         imagesLoaded[index] = false;
@@ -81,11 +89,11 @@ public class ImageViewer : MonoBehaviour
         return newId;
     }
 
-    private void setImage(GameObject viewer, int id)
+    private async Task setImage(GameObject viewer, int id)
     {
         id = clamp(id);
         if (!imagesLoaded[id])
-            loadImage(id);
+            await loadImage(id);
 
         RawImage rawImage = viewer.GetComponent<RawImage>();
         RectTransform rec = viewer.GetComponent<RectTransform>();
@@ -98,30 +106,20 @@ public class ImageViewer : MonoBehaviour
         else
             x = ratio;
         rec.localScale = new Vector3(x, y, 1);
+        return;
     }
 
     public void nextImage()
     {
         ++currentImg;
         currentImg = clamp(currentImg);
-        setImage(mainViewer, currentImg);
-        setImage(prevViewer, currentImg-1);     
-        setImage(nextViewer, currentImg+1);
-        
-        int uIndex = clamp(currentImg-2);
-        unloadImage(uIndex);
+     
     }
 
     public void previousImage()
     {
         --currentImg;
         currentImg = clamp(currentImg);
-        setImage(mainViewer, currentImg);        
-        setImage(prevViewer, currentImg-1);     
-        setImage(nextViewer, currentImg+1);
-        
-        int uIndex = clamp(currentImg+2);
-        unloadImage(uIndex);
     }
 
 }
